@@ -13,8 +13,6 @@
                 <ul class="nav__items">
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
                     <li class="nav__item"><a href="#education" class="nav__link">Education</a></li>
-                    <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
-                    <li class="nav__item"><a href="#experience" class="nav__link">Experience</a></li>
                 </ul>
             </nav>
         </div>
@@ -25,8 +23,37 @@
             <p>Hi I am Pratibha! <br> I am a prefinal year CS undergrad at NIT Raipur<br> I'm into backend development with interests 
                 in blockchain and competitive programming
             </p>
-            <a href="#contact" class="btn btn-contact">Contact me</a>
+            <button onclick="addRandomFact()" id="fact_btn">Know a fact!</button>
+            <div id="fact-container"></div>
         </div>
     <header>
+
+    <!-- Skills -->
+    <section class="skills" id="skills">
+      <div class="row">
+        <h2 class="skill_heading">Skills</h2>
+        <div class="skill_set">
+          <h4 class="element"> C++ </h4>
+          <h4 class="element"> Python </h4>
+          <h4 class="element"> Django </h4>
+          <h4 class="element"> Javascript </h4>
+          <h4 class="element"> Git </h4>
+          <h4 class="element"> Rest API </h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="education" id="education">
+      <div class="row">
+        <h2 class="education_heading">Education</h2>
+        <div class ="education_content">
+            <h4> NIT Raipur </h4>
+            <h5> Computer Science and Engineering </h5>
+            <h5> 2017-21 </h5>
+        </div>
+      </div>
+    </section>
+
   </body>
 </html>

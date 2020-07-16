@@ -2,6 +2,8 @@ body {
     margin: 0;
     text-align: center;
     font-family: 'Roboto', sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .row {
@@ -18,7 +20,7 @@ body {
     margin-top: 0;
     margin-left: 0;
     font-size: 1.5rem;
-    color: white;
+    color:white;
 }
 
 .nav {
@@ -67,11 +69,46 @@ body {
     text-decoration: none;
     padding: 1rem 1rem;
     background-color:#628fd9;
-    color: white;
+    color:white;
     font-weight: 400;
 }
 
 .btn:hover{
     color: black;
     border: 1px solid black;
+}
+
+.skill_heading, .education_heading {
+    border-bottom: 1px solid #628fd9;
+    line-height: 50px;
+    display: inline-block;
+}
+
+.skill_set {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.element {
+    height: 3rem;
+    max-width: 5rem;
+}
+
+section {
+    margin-top: 25rem;
+    padding-left: 3rem;
+    border-bottom: 1px solid gray;
+}
+
+.education {
+    margin-top: 50px;
+}
+#fact_btn {
+    background-color: #628fd9;
+}
+
+#fact-container{
+    color: gray;
+    font-size: 16px;
+    margin-top: 5px;
 }

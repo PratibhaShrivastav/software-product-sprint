@@ -26,3 +26,13 @@ function addRandomFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
+function showComments(){
+    // List of comments
+    const comments_list_container = document.getElementById('comments_list');
+    fetch('/data').then(response => response.json()).then((comments_list) => {
+    comments_list.forEach((line) => {
+      comments_list_container.innerHTML += line + "<br />"
+        });
+    });
+}

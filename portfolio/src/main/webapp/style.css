@@ -112,3 +112,26 @@ section {
     font-size: 16px;
     margin-top: 5px;
 }
+
+#submit_comment {
+    background-color: #628fd9;
+}
+
+#comments {
+    margin-top : 20px;
+}
+
+#comments_list{
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+#show_comments{
+    margin-top: 10px;
+    align-items: left;
+}
+
+#showCommentsbtn {
+    background-color: transparent;
+    color: white;
+}

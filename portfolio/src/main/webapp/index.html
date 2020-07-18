@@ -25,6 +25,16 @@
             </p>
             <button onclick="addRandomFact()" id="fact_btn">Know a fact!</button>
             <div id="fact-container"></div>
+            <div id="comments">
+                <form action="/data" method="POST">
+                    <input type="text" id="comment" name="comment" placeholder="Add comment">
+                    <input type="submit" id="submit_comment" value="submit">
+                </form>
+                <div id="show_comments">
+                    <button onclick="showComments()" id="showCommentsbtn">Show comments</button>
+                    <div id="comments_list"><div>
+                </div>
+            </div>
         </div>
     <header>
 

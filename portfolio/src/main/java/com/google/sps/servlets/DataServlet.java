@@ -33,7 +33,6 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  //private List<String> comments_list = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -60,8 +59,6 @@ public class DataServlet extends HttpServlet {
       commentEntity.setProperty("timestamp", timestamp);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
-      //comments_list.add(comment);
-      // Redirect back to the HTML page
       response.sendRedirect("/");
   }
 }

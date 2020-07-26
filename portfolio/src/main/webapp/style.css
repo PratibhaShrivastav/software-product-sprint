@@ -95,7 +95,7 @@ body {
 }
 
 section {
-    margin-top: 25rem;
+    margin-top: 5rem;
     padding-left: 3rem;
     border-bottom: 1px solid gray;
 }
@@ -115,23 +115,37 @@ section {
 
 #submit_comment {
     background-color: #628fd9;
+    margin-top: 20px;
+    width: 70px;
 }
 
 #comments {
-    margin-top : 20px;
+    margin-top : 50px;
+}
+
+#login_message{
+    font-size: 14px;
+    color: white;
+}
+
+#login_url{
+    color: #628fd9;
+}
+
+#logout_message{
+    font-size: 14px;
+    color: white;
+}
+
+#logout_url{
+    color: #628fd9;
 }
 
 #comments_list{
-    margin-top: 5px;
-    font-size: 13px;
+    margin-bottom: 50px;
+    font-size: 14px;
 }
 
-#show_comments{
-    margin-top: 10px;
-    align-items: left;
-}
-
-#showCommentsbtn {
-    background-color: transparent;
-    color: white;
+#message{
+    margin-top: 40px;
 }

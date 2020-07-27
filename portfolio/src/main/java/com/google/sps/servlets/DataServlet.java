@@ -46,25 +46,25 @@ import java.util.Map;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private static final String Comment = "Comment";
-  private static final String commentMsgProperty = "commentMsg";
-  private static final String userEmailProperty = "userEmail";
-  private static final String timestampProperty = "timestamp";
-  private static final String imageURLProperty = "imageURL";
-  Gson gson = new Gson();
+  private static final String COMMENT = "Comment";
+  private static final String COMMENT_MSG_PROPERTY = "commentMsg";
+  private static final String USER_EMAIL_PROPERTY = "userEmail";
+  private static final String TIMESTAMP_PROPERTY = "timestamp";
+  private static final String IMAGE_URL_PROPERTY = "imageURL";
+  private static final Gson GSON = new Gson();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query(Comment).addSort(timestampProperty, SortDirection.DESCENDING);
+    Query query = new Query(COMMENT).addSort(TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     
     List<Comment> comments_list = new ArrayList<>();
-    results.asIterable().forEach(entity -> comments_list.add(new Comment((String)entity.getProperty(commentMsgProperty),
-      (String)entity.getProperty(userEmailProperty),(long)entity.getProperty(timestampProperty), (String)
-      entity.getProperty(imageURLProperty))));
+    results.asIterable().forEach(entity -> comments_list.add(new Comment((String)entity.getProperty(COMMENT_MSG_PROPERTY),
+      (String)entity.getProperty(USER_EMAIL_PROPERTY),(long)entity.getProperty(TIMESTAMP_PROPERTY), (String)
+      entity.getProperty(IMAGE_URL_PROPERTY))));
     response.setContentType("application/json");
-    response.getWriter().println(gson.toJson(comments_list));
+    response.getWriter().println(GSON.toJson(comments_list));
   }
 
   @Override
@@ -80,11 +80,11 @@ public class DataServlet extends HttpServlet {
       // Get the URL of the image that the user uploaded to Blobstore.
       String imageURL = getUploadedFileUrl(request, "image");
 
-      Entity commentEntity = new Entity(Comment);
-      commentEntity.setProperty(commentMsgProperty, commentMsg);
-      commentEntity.setProperty(userEmailProperty, userEmail);
-      commentEntity.setProperty(timestampProperty, timestamp);
-      commentEntity.setProperty(imageURLProperty, imageURL);
+      Entity commentEntity = new Entity(COMMENT);
+      commentEntity.setProperty(COMMENT_MSG_PROPERTY, commentMsg);
+      commentEntity.setProperty(USER_EMAIL_PROPERTY, userEmail);
+      commentEntity.setProperty(TIMESTAMP_PROPERTY, timestamp);
+      commentEntity.setProperty(IMAGE_URL_PROPERTY, imageURL);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
       response.sendRedirect("/");

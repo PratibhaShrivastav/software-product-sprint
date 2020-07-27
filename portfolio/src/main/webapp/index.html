@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="checkUserStatus(); fetchBlobstoreUrlAndShowForm();showComments();">
     <header class="header">
         <div class="row">
             <nav class="nav">
                 <ul class="nav__items">
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
                     <li class="nav__item"><a href="#education" class="nav__link">Education</a></li>
+                    <li class="nav__item" id="showComments"><a href="#showComments_section" class="nav__link">All Comments</a></li>
                 </ul>
             </nav>
         </div>
@@ -25,18 +26,19 @@
             </p>
             <button onclick="addRandomFact()" id="fact_btn">Know a fact!</button>
             <div id="fact-container"></div>
-            <div id="comments">
-                <form action="/data" method="POST">
+            <div id="comments" hidden>
+                <form id="comment_form" method="POST" enctype="multipart/form-data">
                     <input type="text" id="comment" name="comment" placeholder="Add comment">
-                    <input type="submit" id="submit_comment" value="submit">
+                    <input type="file" name="image" placeholder="Upload image"><br>
+                    <input type="submit" id="submit_comment" value="Submit">
                 </form>
-                <div id="show_comments">
-                    <button onclick="showComments()" id="showCommentsbtn">Show comments</button>
-                    <div id="comments_list"><div>
-                </div>
+            </div>
+            <div id="message">
+                <p id="login_message" hidden><a id="login_url">Login</a> to add a comment </p>
+                <p id="logout_message" hidden>Added a comment? You can <a id="logout_url">logout</a> here </p>
             </div>
         </div>
-    <header>
+    </header>
 
     <!-- Skills -->
     <section class="skills" id="skills">
@@ -65,5 +67,8 @@
       </div>
     </section>
 
+    <section class="showComments_section" id="showComments_section">
+        <div id="comments_list"></div>
+    </section>
   </body>
 </html>

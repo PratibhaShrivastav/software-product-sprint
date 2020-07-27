@@ -60,9 +60,12 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
     
     List<Comment> comments_list = new ArrayList<>();
-    results.asIterable().forEach(entity -> comments_list.add(new Comment((String)entity.getProperty(COMMENT_MSG_PROPERTY),
-      (String)entity.getProperty(USER_EMAIL_PROPERTY),(long)entity.getProperty(TIMESTAMP_PROPERTY), (String)
-      entity.getProperty(IMAGE_URL_PROPERTY))));
+    results.asIterable().forEach(entity -> {
+    Comment comment_obj = Comment.builder().commentMsg((String)entity.getProperty(COMMENT_MSG_PROPERTY)).userEmail(
+    (String)entity.getProperty(USER_EMAIL_PROPERTY)).timestamp((long)entity.getProperty(TIMESTAMP_PROPERTY)).imageURL(
+    (String)entity.getProperty(IMAGE_URL_PROPERTY)).build();
+    comments_list.add(comment_obj);
+    });
     response.setContentType("application/json");
     response.getWriter().println(GSON.toJson(comments_list));
   }

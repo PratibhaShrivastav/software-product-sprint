@@ -29,7 +29,7 @@ public class AuthenticationServlet extends HttpServlet {
         else{
             urlToRedirect = userService.createLoginURL("/");
         }
-        UserLoginStatus userLoginStatus = new UserLoginStatus(isLoggedIn, urlToRedirect);
+        UserLoginStatus userLoginStatus = UserLoginStatus.builder().isLoggedIn(isLoggedIn).urlToRedirect(urlToRedirect).build();
         response.setContentType("application/json");
         response.getWriter().println(GSON.toJson(userLoginStatus));
     }

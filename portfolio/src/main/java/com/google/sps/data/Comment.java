@@ -1,7 +1,7 @@
 package com.google.sps.data;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-@AllArgsConstructor
+@Builder
 public final class Comment{
     private final String commentMsg;
     private final String userEmail;

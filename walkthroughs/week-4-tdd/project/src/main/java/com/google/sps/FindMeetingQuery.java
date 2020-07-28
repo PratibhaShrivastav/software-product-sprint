@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 import java.util.Set;
 
 public final class FindMeetingQuery {
+  private static final int MINUTES_IN_A_DAY = 24*60;
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
       List<String> meetingAttendees = request.getAttendees().stream().collect(Collectors.toList());
       long meetingDuration = request.getDuration();
@@ -38,12 +40,10 @@ public final class FindMeetingQuery {
   private List<TimeRange> getConflictingTimeRanges(Collection<Event> events, List<String> meetingAttendees){
 
       List<TimeRange> conflictingTimeRanges = new ArrayList<>();
-      for(Event event:events){
-          Set<String> eventAttendees = event.getAttendees();
-          if ((eventAttendees.stream().filter(meetingAttendees::contains).collect(Collectors.toList())).size() > 0){
-              conflictingTimeRanges.add(event.getWhen());
-          }
-      }
+      events.forEach(event -> {
+          if ((event.getAttendees().stream().filter(meetingAttendees::contains).collect(Collectors.toList())).size() > 0){
+              conflictingTimeRanges.add(event.getWhen());}
+      });
       return conflictingTimeRanges;
   }
   
@@ -69,7 +69,7 @@ public final class FindMeetingQuery {
       }
 
       // For last time range and END_OF_DAY
-      int duration = (24*60) - prevTimeRangeEnd;
+      int duration = MINUTES_IN_A_DAY - prevTimeRangeEnd;
       if (duration >= meetingDuration){
           meetingTimeRanges.add(TimeRange.fromStartDuration(prevTimeRangeEnd,duration));
       }

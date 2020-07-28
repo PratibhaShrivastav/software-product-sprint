@@ -15,9 +15,65 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.Set;
 
 public final class FindMeetingQuery {
+  private static final int MINUTES_IN_A_DAY = 24*60;
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+      List<String> meetingAttendees = request.getAttendees().stream().collect(Collectors.toList());
+      long meetingDuration = request.getDuration();
+
+      // Find conflicting time ranges
+      List<TimeRange> conflictingTimeRanges =  getConflictingTimeRanges(events, meetingAttendees);
+      
+      // Find meeting time ranges
+      List<TimeRange> meetingTimeRanges = getMeetingTimeRanges(conflictingTimeRanges, meetingDuration);
+
+      return meetingTimeRanges;
+  }
+
+  // Function to return list of conflicting time slots
+  private List<TimeRange> getConflictingTimeRanges(Collection<Event> events, List<String> meetingAttendees){
+
+      List<TimeRange> conflictingTimeRanges = new ArrayList<>();
+      events.forEach(event -> {
+          if ((event.getAttendees().stream().filter(meetingAttendees::contains).collect(Collectors.toList())).size() > 0){
+              conflictingTimeRanges.add(event.getWhen());}
+      });
+      return conflictingTimeRanges;
+  }
+  
+  // Function to return possible meeting time slots
+  private List<TimeRange> getMeetingTimeRanges(List<TimeRange> conflictingTimeRanges, long meetingDuration){
+
+      // Sort conflicting time ranges according to increasing start time
+      conflictingTimeRanges.sort(TimeRange.ORDER_BY_START);
+
+      List<TimeRange> meetingTimeRanges = new ArrayList<>();
+
+      int prevTimeRangeEnd = 0;
+      for(TimeRange timeRange:conflictingTimeRanges){
+          int timeRangeStart = timeRange.start();
+          int timeRangeEnd = timeRange.end();
+          int duration = timeRangeStart - prevTimeRangeEnd;
+          if (duration >= meetingDuration){
+              meetingTimeRanges.add(TimeRange.fromStartDuration(prevTimeRangeEnd,duration));
+          }
+
+          if (timeRangeEnd > prevTimeRangeEnd)
+            prevTimeRangeEnd = timeRangeEnd;
+      }
+
+      // For last time range and END_OF_DAY
+      int duration = MINUTES_IN_A_DAY - prevTimeRangeEnd;
+      if (duration >= meetingDuration){
+          meetingTimeRanges.add(TimeRange.fromStartDuration(prevTimeRangeEnd,duration));
+      }
+
+      return meetingTimeRanges;
   }
 }
